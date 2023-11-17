@@ -1,0 +1,124 @@
+<div class="chart-area">
+    <div class="row">
+        <div class="col-12 mt-4">
+            <!-- <div class="search-content-box mt-3 mb-3">
+                <input type="text" placeholder="Search Chart" class="form-control" name="search" autocomplete="off" />
+            </div> -->
+            <div class="float-right">
+                <div class="input-group date-filter text-right">
+                    <label class="relative top-2">From</label>
+                    <datepicker [hideClose]="true" style="display:inline-table" [(ngModel)]="fromDate" name="fromDate"
+                        placeholder="MM-DD-YYYY" format="MM-DD-YYYY" (select)="onDateSelect($event)" [maxDate]="currentDate"
+                        style="width: 120px !important;padding-left: 5px;"></datepicker>
+                    <label style="padding-left: 20px;" class="relative top-2">To</label>
+                    <datepicker [hideClose]="true" [(ngModel)]="toDate" name="toDate" placeholder="MM-DD-YYYY"
+                        format="MM-DD-YYYY" [minDate]="fromDate" [maxDate]="currentDate"
+                        style="width: 120px !important;padding-left: 5px;">
+                    </datepicker>
+                    <button style="margin-left:20px;" type="button" class="btn btn-primary btn-sm no-padding go-btn"
+                        size-13 (click)="getInitialData(fromDate,toDate)">GO</button>
+                    <button class="btn btn-primary btn-sm no-padding go-btn ml-3 px-3" (click)="openWHPopup()">ADD
+                        WEIGHT
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 mt-4" style="display:block">
+            <canvas baseChart *ngIf="barChartData" [datasets]="barChartData" [labels]="barChartLabels"
+                [options]="barChartOptions" width="300" height="300" [plugins]="barChartPlugins"
+                [legend]="barChartLegend" [chartType]="barChartType" [colors]="barChartColors">
+            </canvas>
+        </div>
+        <!-- <div class="col-12 summary-info">
+            <h4 class="bold mt-2">Summary</h4>
+            <div class="row">
+                <div class="col-3 mb-2">
+                    <div class="info">N/A</div>
+                    <div class="label">Since Start of Treatment</div>
+                </div>
+                <div class="col-3 mb-2">
+                    <div>N/A</div>
+                    <div class="label">Verses Target</div>
+                </div>
+                <div class="col-3 mb-2">
+                    <div>N/A</div>
+                    <div class="label">Start of Treatment</div>
+                </div>
+                <div class="col-3 mb-2">
+                    <div>N/A</div>
+                    <div class="label">Verses Target</div>
+                </div>
+                <div class="col-3 mb-2">
+                    <div class="info">N/A</div>
+                    <div class="label">Since Start of Treatment</div>
+                </div>
+                <div class="col-3 mb-2">
+                    <div>N/A</div>
+                    <div class="label">Verses Target</div>
+                </div>
+                <div class="col-3 mb-2">
+                    <div>N/A</div>
+                    <div class="label">Start of Treatment</div>
+                </div>
+                <div class="col-3 mb-2">
+                    <div>N/A</div>
+                    <div class="label">Verses Target</div>
+                </div>
+            </div>
+        </div> -->
+    </div>
+</div>
+
+<ng-template #archiveContent let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h5 class="modal-title" id="modal-basic-title">Add Weight</h5>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click');reset()">
+            <div class="close-wrapper">
+                <span class="icon-close" aria-hidden="true"></span>
+                <!--&#10006;-->
+            </div>
+        </button>
+    </div>
+    <div class="modal-body">
+
+        <form [formGroup]="watchHistoryForm">
+            <div class="row mb-3">
+                <div class="col-12">
+                    <fieldset class="w-fieldset">
+                        <legend>
+                            <label class="label">Date</label>
+                        </legend>
+                        <datepicker class="w-100" formControlName="date" format="MM-DD-YYYY" [maxDate]="currentDate">
+                        </datepicker>
+                    </fieldset>
+                    <validation-message [messageToAppend]="" [control]="watchHistoryForm.controls.date">
+                    </validation-message>
+                </div>
+                <div class="col-12 mt-3">
+                    <fieldset class="w-fieldset">
+                        <legend> <label class="label">Weight</label></legend>
+                        <input style="width:76%;float:left;" type="text" formControlName="weight"
+                            class="form-control textbox" maxlength="" />
+                        <select style="width:24%;" class="select-cstom-control form-control"
+                            formControlName="weightUnits">
+                            <option value="LBS">LBS</option>
+                            <option value="KGS">KGS</option>
+                        </select>
+                    </fieldset>
+                    <validation-message [messageToAppend]="" [control]="watchHistoryForm.controls.weight">
+                    </validation-message>
+                </div>
+                <div class="col-12 mt-4 mb-2">
+
+                    <button type="button" class="btn btn-primary btn-custom float-right "
+                        (click)="addWatchHistory()">Submit
+                    </button>
+                    <button type="button" class="btn btn-secondary btn-custom float-right mr-3"
+                        (click)="d('Cross click');reset()">Cancel
+                    </button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</ng-template>

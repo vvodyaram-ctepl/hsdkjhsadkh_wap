@@ -1,0 +1,42 @@
+.obs-blk{
+    font-size: 13px;
+    .p-image, .p-video{
+        border-radius: 50%;
+        width:36px;
+        height:36px;
+        object-fit:contain;
+        border: 1px solid #ccc;
+        position: absolute;
+      }   
+      > div{
+        position: relative;
+        padding-left:40px;
+        margin-top: 10px;
+        min-height: 35px;
+        .b-title{        
+            font-weight:600;
+            color:#212F3A;
+            // text-overflow: ellipsis;
+            // overflow: hidden; 
+            // white-space: nowrap;
+        }
+        .b-date{
+            color:#828699;
+            position: absolute;
+            right:0;
+            font-size: 12px;
+            bottom:0;
+        }
+        .b-dis{
+            color:#828699;
+            // text-overflow: ellipsis;
+            // overflow: hidden;  
+            // white-space: nowrap;
+            padding-right:60px;
+        }
+    }
+}
+.viewmore-link{
+    color: #37b57c;
+    font-weight: 600;
+}

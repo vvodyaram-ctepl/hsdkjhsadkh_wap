@@ -1,0 +1,86 @@
+<div class="content-box">
+    <div class="content-hdr">
+        <div class="row">
+            <div class="col-12 block-left-center">
+                Questionnaire Response
+            </div>
+        </div>
+    </div>
+
+    <div class="content-blk">
+        <div class="content-block">
+            <div class="row que-header">
+                <div class="col">
+                    <div class="q-hdr-name">QUESTIONNAIRE NAME</div>
+                    <div class="q-name">{{this.questionnaireName}}</div>
+                </div>
+                <div class="col">
+                    <div class="q-hdr-name">PET PARENT</div>
+                    <div class="q-name">{{this.petParentName}}</div>
+                </div>
+                <div class="col">
+                    <div class="q-hdr-name">PET NAME</div>
+                    <div class="q-name">{{this.petName}}</div>
+                </div>
+                <div class="col">
+                    <div class="q-hdr-name">STUDY</div>
+                    <div class="q-name">{{this.study}}</div>
+                </div>
+                <div class="col">
+                    <div class="q-hdr-name">SUBMITTED ON</div>
+                    <div class="q-name">{{this.submittedOn}}</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col mt-3 custom-table">
+                    <table>
+                        <!-- <thead class="table-hdr">
+                            <tr>
+                                <th *ngFor="let list of questionnaireResponseList; let i = index">
+                                    {{ list.label }}
+                                </th>
+                            </tr>
+                        </thead> -->
+                        <tbody class="table-body" *ngIf="questionnaireResponseList?.length > 0">
+                            <tr *ngFor="let list of questionnaireResponseList; let i = index">
+                                <td>
+                                    {{'Q'+(i+1)}} {{ list.question }}
+                                </td>
+                                <td style="color:#37B57C;">
+                                    {{'A'+(i+1)}} {{ list.answer }}
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tbody class="table-body" *ngIf="questionnaireResponseList?.length == 0">
+                            <tr>
+                                <td>No Records Found</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- <div class="row">
+        <div class="col mt-3 custom-table">
+            <table>
+                <tbody class="table-body" *ngIf="questionnaireResponseList?.length > 0">
+                    <tr *ngFor="let list of questionnaireResponseList; let i = index">
+                        <td>
+                            {{'Q'+(i+1)}} {{ list.question }}
+                        </td>
+                        <td>
+                            {{'A'+(i+1)}} {{ list.answer }}
+                        </td>
+                    </tr>
+                </tbody>
+                <tbody class="table-body" *ngIf="questionnaireResponseList?.length == 0">
+                    <tr>
+                        <td>No Records Found</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div> -->
+</div>

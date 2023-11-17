@@ -1,0 +1,23 @@
+.que-header{
+    padding-bottom: 15px;
+    border-bottom: 1px solid #37B57C;
+    margin-bottom: 15px;
+    .q-hdr-name{
+        font-weight: 300;
+        font-size: 14px;
+        letter-spacing: -0.4px;
+    }
+    .q-name{
+        font-weight: bold;
+        font-size: 14px;
+        letter-spacing: -0.4px;
+        color: #00CF99;
+        text-transform: capitalize;
+    }
+}
+.custom-table table td{
+    border-top: 0;
+    border-bottom: 1px solid #dee2e6;
+    line-height: 3;
+    font-weight: 600;
+}

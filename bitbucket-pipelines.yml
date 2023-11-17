@@ -1,0 +1,114 @@
+image: gcr.io/google.com/cloudsdktool/cloud-sdk:latest
+options:
+  docker: true
+  size: 2x
+pipelines:
+  custom:
+    develop2:
+      - step:
+          script:
+            - export BRANCH=$(git branch | sed -n -e 's/^\* \(.*\)/\1/p')
+            - export BITBUCKET_COMMIT_SHORT=$(git rev-parse --short HEAD)
+            - export DOCKER_BUILDKIT=0
+            - echo $BITBUCKET_COMMIT_SHORT
+            - echo $GCP_SERVICE_ACCOUNT_KEY | base64 -d > gcloud-service-key.json
+            - export GOOGLE_APPLICATION_CREDENTIALS="`pwd`/gcloud-service-key.json"
+            - gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS
+            - gcloud config set project $GCP_PROJECT_ID
+            - gcloud auth configure-docker us-central1-docker.pkg.dev
+            - docker build -t us-central1-docker.pkg.dev/ct-wearables-analytical-pf/wearables-wap-dev/wearables-wap-dev:$BRANCH-$BITBUCKET_COMMIT_SHORT --build-arg BRANCH=$BRANCH .
+            - docker push us-central1-docker.pkg.dev/ct-wearables-analytical-pf/wearables-wap-dev/wearables-wap-dev:$BRANCH-$BITBUCKET_COMMIT_SHORT
+            - gcloud run deploy wp-ang-$BRANCH --region=us-central1 --image=us-docker.pkg.dev/ct-wearables-analytical-pf/wearables-wap-dev/wearables-wap-dev:$BRANCH-$BITBUCKET_COMMIT_SHORT --service-account=an-wap-bitbucket@ct-wearables-analytical-pf.iam.gserviceaccount.com --allow-unauthenticated
+          services:
+            - docker
+    qa:
+      - step:
+          script:
+            - export BRANCH=$(git branch | sed -n -e 's/^\* \(.*\)/\1/p')
+            - export BITBUCKET_COMMIT_SHORT=$(git rev-parse --short HEAD)
+            - export DOCKER_BUILDKIT=0
+            - echo $BITBUCKET_COMMIT_SHORT
+            - echo $GCP_SERVICE_ACCOUNT_KEY | base64 -d > gcloud-service-key.json
+            - export GOOGLE_APPLICATION_CREDENTIALS="`pwd`/gcloud-service-key.json"
+            - gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS
+            - gcloud config set project $GCP_PROJECT_ID
+            - gcloud auth configure-docker us-central1-docker.pkg.dev
+            - docker build -t us-central1-docker.pkg.dev/ct-wearables-analytical-pf/wearables-wap-dev/wearables-wap-dev:$BRANCH-$BITBUCKET_COMMIT_SHORT --build-arg   BRANCH=$BRANCH .
+            - docker push us-central1-docker.pkg.dev/ct-wearables-analytical-pf/wearables-wap-dev/wearables-wap-dev:$BRANCH-$BITBUCKET_COMMIT_SHORT
+            - gcloud run deploy wp-ang-$BRANCH --region=us-central1 --image=us-central1-docker.pkg.dev/ct-wearables-analytical-pf/wearables-wap-dev/wearables-wap-dev:$BRANCH-$BITBUCKET_COMMIT_SHORT --service-account=an-wap-bitbucket@ct-wearables-analytical-pf.iam.gserviceaccount.com --allow-unauthenticated
+          services:
+            - docker
+    uat:
+      - step:
+          script:
+            - export BRANCH=$(git branch | sed -n -e 's/^\* \(.*\)/\1/p')
+            - export BITBUCKET_COMMIT_SHORT=$(git rev-parse --short HEAD)
+            - export DOCKER_BUILDKIT=0
+            - echo $BITBUCKET_COMMIT_SHORT
+            - echo $GCP_SERVICE_ACCOUNT_KEY | base64 -d > gcloud-service-key.json
+            - export GOOGLE_APPLICATION_CREDENTIALS="`pwd`/gcloud-service-key.json"
+            - gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS
+            - gcloud config set project $GCP_PROJECT_ID
+            - gcloud auth configure-docker us-central1-docker.pkg.dev
+            - docker build -t us-central1-docker.pkg.dev/ct-wearables-analytical-pf/wearables-wap-dev/wearables-wap-dev:$BRANCH-$BITBUCKET_COMMIT_SHORT --build-arg   BRANCH=$BRANCH .
+            - docker push us-central1-docker.pkg.dev/ct-wearables-analytical-pf/wearables-wap-dev/wearables-wap-dev:$BRANCH-$BITBUCKET_COMMIT_SHORT
+            - gcloud run deploy wp-ang-$BRANCH --region=us-central1 --image=us-central1-docker.pkg.dev/ct-wearables-analytical-pf/wearables-wap-dev/wearables-wap-dev:$BRANCH-$BITBUCKET_COMMIT_SHORT --service-account=an-wap-bitbucket@ct-wearables-analytical-pf.iam.gserviceaccount.com --allow-unauthenticated
+          services:
+            - docker
+    uat3:
+      - step:
+          script:
+            - export BRANCH=$(git branch | sed -n -e 's/^\* \(.*\)/\1/p')
+            - export BITBUCKET_COMMIT_SHORT=$(git rev-parse --short HEAD)
+            - sed -i -e 's%$CLIENT_SECRET%'"$CLIENT_SECRET"'%g' ./src/environments/environment.$BRANCH.ts
+            - export DOCKER_BUILDKIT=0
+            - echo $BITBUCKET_COMMIT_SHORT
+            - echo $GCP_SERVICE_ACCOUNT_KEY | base64 -d > gcloud-service-key.json
+            - export GOOGLE_APPLICATION_CREDENTIALS="`pwd`/gcloud-service-key.json"
+            - gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS
+            - gcloud config set project $GCP_PROJECT_ID
+            - gcloud auth configure-docker us-central1-docker.pkg.dev
+            - docker build -t us-central1-docker.pkg.dev/ct-wearables-analytical-pf/wearables-wap-dev/wearables-wap-dev:$BRANCH-$BITBUCKET_COMMIT_SHORT --build-arg   BRANCH=$BRANCH .
+            - docker push us-central1-docker.pkg.dev/ct-wearables-analytical-pf/wearables-wap-dev/wearables-wap-dev:$BRANCH-$BITBUCKET_COMMIT_SHORT
+            - gcloud run deploy wp-ang-$BRANCH --region=us-central1 --image=us-central1-docker.pkg.dev/ct-wearables-analytical-pf/wearables-wap-dev/wearables-wap-dev:$BRANCH-$BITBUCKET_COMMIT_SHORT --service-account=an-wap-bitbucket@ct-wearables-analytical-pf.iam.gserviceaccount.com --allow-unauthenticated
+          services:
+            - docker
+    longitudinal-uat:
+      - step:
+          script:
+            - export BRANCH=$(git branch | sed -n -e 's/^\* \(.*\)/\1/p')
+            - export BITBUCKET_COMMIT_SHORT=$(git rev-parse --short HEAD)
+            - sed -i -e 's%$CLIENT_SECRET%'"$CLIENT_SECRET"'%g' ./src/environments/environment.$BRANCH.ts
+            - export DOCKER_BUILDKIT=0
+            - echo $BITBUCKET_COMMIT_SHORT
+            - echo $GCP_SERVICE_ACCOUNT_KEY | base64 -d > gcloud-service-key.json
+            - export GOOGLE_APPLICATION_CREDENTIALS="`pwd`/gcloud-service-key.json"
+            - gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS
+            - gcloud config set project $GCP_PROJECT_ID
+            - gcloud auth configure-docker us-central1-docker.pkg.dev
+            - docker build -t us-central1-docker.pkg.dev/ct-wearables-analytical-pf/wearables-wap-dev/wearables-wap-dev:$BRANCH-$BITBUCKET_COMMIT_SHORT --build-arg   BRANCH=$BRANCH .
+            - docker push us-central1-docker.pkg.dev/ct-wearables-analytical-pf/wearables-wap-dev/wearables-wap-dev:$BRANCH-$BITBUCKET_COMMIT_SHORT
+            - gcloud run deploy wp-ang-$BRANCH --region=us-central1 --image=us-central1-docker.pkg.dev/ct-wearables-analytical-pf/wearables-wap-dev/wearables-wap-dev:$BRANCH-$BITBUCKET_COMMIT_SHORT --service-account=an-wap-bitbucket@ct-wearables-analytical-pf.iam.gserviceaccount.com --allow-unauthenticated
+          services:
+            - docker
+    master:
+      - step:
+          script:
+            - export BRANCH=$(git branch | sed -n -e 's/^\* \(.*\)/\1/p')
+            - export BITBUCKET_COMMIT_SHORT=$(git rev-parse --short HEAD)
+            - sed -i -e 's%$CLIENT_SECRET%'"$CLIENT_SECRET"'%g' ./src/environments/environment.$BRANCH.ts
+            - export DOCKER_BUILDKIT=0
+            - echo $BITBUCKET_COMMIT_SHORT
+            - echo $GCP_PROD_SERVICE_ACCOUNT_KEY | base64 -d > gcloud-service-key.json
+            - export GOOGLE_APPLICATION_CREDENTIALS="`pwd`/gcloud-service-key.json"
+            - gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS
+            - gcloud config set project $GCP_PROD_PROJECT_ID
+            - gcloud auth configure-docker us-docker.pkg.dev
+            - docker build -t us-docker.pkg.dev/ct-wearables-analytical-prod/ap-wpang-prod/ap-wpang-prod:$BRANCH-$BITBUCKET_COMMIT_SHORT --build-arg   BRANCH=$BRANCH .
+            - docker push us-docker.pkg.dev/ct-wearables-analytical-prod/ap-wpang-prod/ap-wpang-prod:$BRANCH-$BITBUCKET_COMMIT_SHORT
+          services:
+            - docker
+definitions:
+  services:
+    docker:
+      memory: 7099

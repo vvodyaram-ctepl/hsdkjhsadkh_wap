@@ -1,0 +1,127 @@
+<form [formGroup]="addQuestionnaireForm">
+    <div class="content-box">
+        <div class="content-hdr">
+
+        </div>
+        <div class="content-block">
+            <!-- {{addQuestionnaireForm.value | json}} -->
+            <div formArrayName="arr" *ngFor="
+                let a of addQuestionnaireForm.get('arr')['controls'];
+                let i = index;
+                let last = last
+              ">
+                <div class="row mb-3" [formGroupName]="i">
+                    <div class="col-4">
+                        <!-- {{addQuestionnaireForm.value.arr[i].disabled | json}} -->
+                        <fieldset class="w-fieldset" [disabled]="addQuestionnaireForm.value.arr[i].disabled">
+                            <legend>
+                                <label class="label">Questionnaire Name </label>
+                            </legend>
+                            <lib-typeahead [data]="qList" matcher="questionnaireName"
+                                formControlName="questionnaireName" (selectedItem)='populate($event,i)'
+                                (onClear)="onClear(i)" class="w-100 mb-0" placeholder="" class="w-100">
+                            </lib-typeahead>
+                        </fieldset>
+                        <validation-message
+                            [control]="addQuestionnaireForm.get('arr').controls[i].controls.questionnaireName">
+                        </validation-message>
+                    </div>
+                    <div class="col-3">
+                        <fieldset class="w-fieldset" [disabled]="addQuestionnaireForm.value.arr[i].disabled">
+                            <legend>
+                                <label class="label">Start Date </label>
+                            </legend>
+                            <datepicker class="w-100" formControlName="startDate" format="MM-DD-YYYY"
+                                [minDate]="studyStartDate" (select)="startdateSelect()"></datepicker>
+                        </fieldset>
+                        <validation-message [control]="
+                        addQuestionnaireForm.get('arr').controls[i].controls.startDate
+                    ">
+                        </validation-message>
+                    </div>
+                    <div class="col-3">
+                        <fieldset class="w-fieldset" [disabled]="addQuestionnaireForm.value.arr[i].disabled">
+                            <legend>
+                                <label class="label">End Date</label>
+                            </legend>
+                            <datepicker class="w-100" formControlName="endDate"
+                                [minDate]="addQuestionnaireForm.value.arr[i].startDate" format="MM-DD-YYYY">
+                            </datepicker>
+                        </fieldset>
+                        <validation-message [control]="
+                            addQuestionnaireForm.get('arr').controls[i].controls.endDate
+                          ">
+                        </validation-message>
+                    </div>
+                    <div class="col-2 center-align">
+                        <div class="card icon-card-list red-bg mr-2 mt-3 pointer-cursor" title="Remove"
+                            *ngIf="addQuestionnaireForm.value.arr.length > 1" (click)="removeItem(i)">
+                            <span class=" pointer-cursor size-17" title="Remove">-</span>
+                        </div>
+
+                        <div class="card icon-card-list blue-bg mt-3" title="Add" *ngIf="last">
+                            <span class="fa fa-plus pointer-cursor size-15" style="color:white;" title="Add"
+                                (click)="addItem()"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <!-- <button class="btn btn-primary" type="button" *ngIf="addPlanForm.value.arr == ''" (click)="addItem()" style="margin-right: 5px;">Add Plan</button> -->
+                </div>
+            </div> 
+            <div class="row">
+                <div class="col-12">
+                    <div class="float-right">
+                        <button class="btn btn-secondary" type="button" (click)="back()">
+                            Back</button>&nbsp;&nbsp;
+
+                        <button *ngIf="!editFlag || (editFlag && !isExternalData)" class="btn btn-primary"
+                            type="button" (click)="submit()">
+                            <span>submit</span>
+                        </button>
+                        <button *ngIf="(editFlag && isExternalData)" class="btn btn-primary" type="button"
+                            (click)="next()">
+                            <span>Next</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<ng-template #confrimationPopup let-c="close" let-d="dismiss">
+    <!-- 
+            <div class="modal-header">
+                <h5 class="modal-title" id="modal-basic-title">
+                    The {{studyName}} study is created successfully.
+                </h5>
+                <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                    <div class="close-wrapper">
+                        <span class="icon-close" aria-hidden="true"></span>
+                    </div>
+                </button>
+            </div> -->
+    <div class="modal-body">
+        <div class="row mb-3">
+            <div class="col-12">
+                <p>
+                    The <b>{{studyName}}</b> study is added successfully.
+                </p>
+                <p>
+                    To automatically create all pet and pet parents associated with this study (in Prelude) on the
+                    portal, please follow the below steps:
+                </p>
+                <ul class="ulList">
+                    <li>Visit the “Edit Study page” for this study after 15 minutes</li>
+                    <li>Navigate to the “Prelude Configuration” tab</li>
+                    <li>Define the Prelude fields that need to be configured for this study</li>
+                    <li>Submit the details</li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+</ng-template>

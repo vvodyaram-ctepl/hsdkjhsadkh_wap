@@ -1,0 +1,85 @@
+<form [formGroup]="mobileAppForm">
+    <div class="content-box">
+        <div class="content-block">
+            <div class="row mb-4">
+                <div class="col-6">
+                    <div class="label-hdr">
+                        App Config Menu
+                    </div>
+                </div>
+                <!-- <div class="col-6">
+                    <div class="label-hdr">
+                        Permissions
+                    </div>
+                </div> -->
+            </div>
+
+            <div formArrayName="permissionMap"
+                *ngFor="let role of mobileAppForm.get('permissionMap')['controls']; let i = index">
+                <div class="row mb-3" [formGroupName]="i">
+                    <!-- {{this.mobileAppForm.value | json}} -->
+                    <div class="col-6">
+                        <div class="checkbox-wrapper">
+                            <span class="check mr-2">
+                                <!-- [value]="menu.menuId" -->
+                                <input type="checkbox" class="checkbox-width-20" (change)="onCheckboxChange($event,i)"
+                                    [value]="role.value.menuCheck" formControlName="menuCheck" />
+                            </span>
+                            <span class="p-absolute">{{role.value.menuName.mobileAppConfigName}}</span>
+                        </div>
+                    </div>
+                    <!-- <div class="col-6">
+                            <select class="form-control w-100" formControlName="menuActionName" disabled="true">
+                                <option value="">Set Permissions</option>
+                                <option *ngFor="let list of data.menuActions" [value]="list.menuActionId">
+                                    {{list.menuActionName}}</option>
+                            </select>
+                        </div> -->
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 mt-4">
+                    <div class="float-right">
+                        <button class="btn btn-secondary" type="button" (click)="back()">Back</button>&nbsp;&nbsp;
+                        <button class="btn btn-primary" type="button" (click)="next()">Next</button>
+                        <!-- <button *ngIf="!viewFlag" class="btn btn-primary" type="button" (click)="submit()">
+                            <span>submit</span>
+                        </button> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<ng-template #archiveContent let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h5 class="modal-title" id="modal-basic-title">
+            Change Permissions ?
+        </h5>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click');enableSelection()">
+            <div class="close-wrapper">
+                <span class="icon-close" aria-hidden="true"></span>
+            </div>
+        </button>
+    </div>
+    <div class="modal-body">
+
+        <div class="row mb-4">
+            <div class="col-12">
+                Do you want to change the permissions? Pet parent may lose access to some functionalities.
+            </div>
+        </div>
+        <div class="row text-center">
+            <div class="col-12 mb-4">
+                <button type="button" class="btn btn-primary btn-custom mr-3" (click)="d('Cross click')">
+                    OK
+                </button>
+                <button type="button" class="btn btn-primary btn-custom" (click)="d('Cross click');enableSelection()">
+                    Cancel
+                </button>
+            </div>
+        </div>
+
+    </div>
+</ng-template>

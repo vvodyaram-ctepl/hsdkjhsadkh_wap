@@ -1,0 +1,16 @@
+<div class="content-box">
+    <div class="content-hdr">
+        <div class="row">
+            <div class="col-12 block-left-center">
+                {{this.studyName}} : {{ this.questionnareName }}
+            </div>
+        </div>
+    </div>
+    <div class="content-blk">
+        <datatable [headers]="headers" [filterTypeArr]="filterTypeArr" placeholder="Search" 
+        [hideExport]="true" (nodeAction)="getNode($event)" (formatter)="formatter($event)" 
+        defaultColumn="name" dir="DESC" 
+        url={{this.url}}>
+        </datatable>
+    </div>
+</div>

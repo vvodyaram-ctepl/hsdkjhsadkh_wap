@@ -1,0 +1,74 @@
+app-campaign-activities {
+.content-box .content-block {
+    padding:30px 15px;
+}
+datatable .table-responsive.outer-table-padding {
+    padding: 0px;
+}
+.reject-button {
+    width: 56px;
+    padding: 3px;
+    height: 25px;
+    margin-bottom: 0px !important;
+    display: inline-block;
+    border: 1px solid red;
+    text-align: center;
+    font: normal normal 600 15px/16px Titillium Web;
+    letter-spacing: -0.15px;
+    color: #DE1010;
+    background: #ffdddd;
+    opacity: 1;
+    border-radius: 5px;
+    cursor: pointer;
+  
+  }
+  .accept-button {
+    width: 56px;
+    padding: 3px;
+    height: 25px;
+    margin-bottom: 0px !important;
+    cursor: pointer;
+    display: inline-block;
+    border: 1px solid #1CCF99;
+    text-align: center;
+    font: normal normal 600 15px/16px Titillium Web;
+    letter-spacing: -0.15px;
+    color: #1CCF99;
+    background: #d4f7ec;
+    opacity: 1;
+    border-radius: 5px;
+  }
+  .approve-status {
+    font: normal normal 600 15px/16px Titillium Web;
+    letter-spacing: -0.15px;
+    color: #1CCF99 !important;
+    opacity: 1;
+  }
+  .reject-status {
+    font: normal normal 600 15px/16px Titillium Web;
+    letter-spacing: -0.15px;
+    color: #DE1010 !important;
+    opacity: 1;
+  }
+  .pending-status{
+    font: normal normal 600 15px/16px Titillium Web;
+    letter-spacing: -0.15px;
+    color: #BC8B15 !important;
+    opacity: 1;
+  }
+  .petImage {
+    width: 40px;
+    margin-right: 10px;
+    height: 35px;
+    display: inline-block;
+    float: left;
+    padding: 0px; 
+    overflow: hidden;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    border: 1px solid #4DD3D9;
+    border-radius: 4px;
+    opacity: 1;
+}
+  
+}

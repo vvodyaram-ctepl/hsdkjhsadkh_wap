@@ -1,0 +1,56 @@
+<form [formGroup]="addQuestionnaireForm">
+    <div class="content-box">
+        <div class="content-block">
+            <div class="row mb-3">
+                <div class="col-6">
+                    <fieldset class="w-fieldset">
+                        <legend><label class="label">Questionnaire Name <span class="asterisk">*</span></label></legend>
+                        <input type="text" formControlName="questionnaireName" class="form-control textbox"
+                            maxLength="100" />
+                    </fieldset>
+                    <validation-message [control]="addQuestionnaireForm.controls.questionnaireName">
+                    </validation-message>
+                </div>
+
+                <div class="col-3">
+                    <fieldset class="w-fieldset">
+                        <legend><label class="label">Start Date <span class="asterisk">*</span></label></legend>
+                        <datepicker class="w-100" formControlName="startDate" format="MM-DD-YYYY"></datepicker>
+                    </fieldset>
+                    <validation-message [control]="addQuestionnaireForm.controls.startDate"></validation-message>
+                </div>
+
+                <div class="col-3">
+                    <fieldset class="w-fieldset">
+                        <legend>
+                            <label class="label">End Date <span class="asterisk">*</span></label>
+                        </legend>
+                        <datepicker class="w-100" formControlName="endDate"
+                            [minDate]="addQuestionnaireForm.value.startDate" format="MM-DD-YYYY"></datepicker>
+                    </fieldset>
+                    <validation-message [control]="addQuestionnaireForm.controls.endDate"></validation-message>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-6">
+                    <fieldset class="w-fieldset">
+                        <legend><label class="label w-100">Status </label></legend>
+                        <input type="text" class="form-control textbox status" value="Draft" disabled />
+                    </fieldset>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="float-right">
+                        <button class="btn btn-secondary" type="button"
+                            (click)="backToList()">Cancel</button>&nbsp;&nbsp;
+                        <button class="btn btn-primary" type="button" (click)="next()">Next</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</form>

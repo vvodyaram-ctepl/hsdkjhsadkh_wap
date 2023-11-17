@@ -1,0 +1,40 @@
+.heading-text {
+    font: normal normal bold 18px/24px Titillium Web;
+letter-spacing: -0.36px;
+color: #00CF99;
+text-transform: uppercase;
+opacity: 1;
+}
+
+.b-1-green {
+    border-bottom: 1px solid #37B57C;
+    
+}
+.d-flex {
+    display: flex;
+    align-items: center;
+}
+.icon-card-list {
+    bottom:0px;
+    box-shadow: none;
+    width: 30px;
+    height: 30px;
+}
+
+.select-custom.form-control {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    border-radius: 8px;
+    width:100%;
+    // border: 0;
+    padding: 8px;
+    padding-right: 32px;
+    // background: #FFF url(/assets/images/downArrow2.svg) no-repeat right;
+    background: #FFF url(../../../../../src/assets/images/downArrow2.png) no-repeat right;
+   }
+
+   .form-control.textbox {
+    border-radius: 8px;
+   }

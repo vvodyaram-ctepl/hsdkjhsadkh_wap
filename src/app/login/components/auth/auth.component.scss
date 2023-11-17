@@ -1,0 +1,102 @@
+app-auth {
+    /* .authentication-blk {
+    } */
+    .loginbg {
+        width: 100%;
+
+        .login-pg {
+            width: 100%;
+            position: absolute;
+            top: 0;
+            height: 100vh;
+            overflow: hidden;
+            background-color: #eefff9;
+            // margin-top: -25%;
+            img {
+                width: 80%;
+                // margin-top: -5%;
+            }
+        }
+        /* &::after{
+        content: " ";
+        display: block;
+        height: 278px;
+        margin-top: 379px;
+        top: 100%;
+        position: absolute;
+        width: 100%;
+     //   background: transparent linear-gradient(180deg, #ECECEC 0%, #C2BCBC1C 100%) 0% 0% no-repeat padding-box;
+    } */
+    }
+    .petImg {
+        img {
+            width: 60%;
+            position: absolute;
+            right: 15%;
+            bottom: 0;
+        }
+    }
+    .loginlogo {
+        width: 100%;
+        float: left;
+        .logo-img {
+            float: left;
+            img {
+                height: 90px;
+                margin-left: -10px;
+            }
+        }
+        .logo-text {
+            float: left;
+            font-weight: 700;
+            padding-left: 10px;
+            .logo-h1 {
+                color: #37b57c;
+                font-size: 26px;
+                margin-top: 6px;
+                line-height: 1;
+            }
+            .logo-h2 {
+                color: #415037;
+                font-size: 20px;
+            }
+        }
+        &:after {
+            clear: both;
+        }
+    }
+    .align-vertically {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-right: 20%;
+        transform: translateY(25%);
+    }
+    @media only screen and (min-width: 768px) and (max-width: 991px) {
+        .align-vertically {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin-left: inherit;
+            margin-top: inherit;
+        }
+    }
+    @media (max-width: 767px) {
+        .align-vertically {
+            margin-left: 10px;
+        }
+        .petImg {
+            max-width: 50%;
+            margin-left: 25%;
+        }
+    }
+    @media only screen and (min-width: 576px) and (max-width: 767px) {
+        .align-vertically {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin-left: 8.3333333333%;
+            margin-top: -8%;
+        }
+    }
+}

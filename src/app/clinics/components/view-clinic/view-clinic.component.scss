@@ -1,0 +1,51 @@
+
+app-view-clinic{
+.pi_text {
+    font: normal normal normal 13px/8px Titillium Web;
+letter-spacing: -0.32px;
+color: #30394C;
+}
+.phone_number_text {
+    font: normal normal 600 13px/8px Titillium Web;
+letter-spacing: -0.36px;
+color: #00CF99;
+}
+
+
+ .img-box-blue {
+    background: #F4F0FF 0% 0% no-repeat padding-box;
+    border-radius: 6px;
+    width: 40px;
+height: 40px;
+display: flex;
+justify-content: center;
+align-items: center;
+ }
+
+ .cal-box-blue {
+    background:#2cc6dc 0% 0% no-repeat padding-box;
+    border-radius: 50%;
+    width: 40px;
+height: 40px;
+display: flex;
+justify-content: center;
+align-items: center;
+ }
+.cal-image {
+ width: 18px;
+ height: 40px;
+}
+.not-image {
+    width: 28px;
+    height: 40px;
+}
+.icon-style{
+    i{
+        color:#00CF99
+    }
+}
+
+.icon-notification.disabled{
+    color:#de1313;
+}
+}
