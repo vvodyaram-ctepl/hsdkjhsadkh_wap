@@ -23,7 +23,7 @@
     "@angular/animations": "10.0.0",
     "@angular/common": "10.0.0",
     "@angular/compiler": "10.0.0",
-    "@angular/core": "10.0.0",
+    "@angular/core": "10.2.5",
     "@angular/forms": "10.0.0",
     "@angular/http": "7.2.16",
     "@angular/localize": "10.0.0",
